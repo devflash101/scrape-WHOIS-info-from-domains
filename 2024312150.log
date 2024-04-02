@@ -1,0 +1,69 @@
+Collecting whoisdomain
+  Downloading whoisdomain-1.20240129.1-py3-none-any.whl (64 kB)
+Installing collected packages: whoisdomain
+Successfully installed whoisdomain-1.20240129.1
+1/565 url='https://storyware.co'
+2/565 url='https://dpgmedia.nl'
+3/565 url='https://chrisreeves.com.au'
+4/565 url='https://mac.com'
+5/565 url='https://xplortechnologies.com'
+6/565 url='https://growthengine.ca'
+7/565 url='https://hotmail.com'
+8/565 url='https://mediumlargela.com'
+9/565 url='https://chundersoft.com'
+10/565 url='https://21ilab.com'
+11/565 url='https://dgt.me'
+12/565 url='https://parasol-island.com'
+13/565 url='https://vandespreng.nl'
+14/565 url='https://yoast.com'
+15/565 url='https://freshcontent.nl'
+16/565 url='https://melodysharp.com'
+17/565 url='https://mediaura.com'
+18/565 url='https://escapeplanmarketing.com'
+19/565 url='https://visionefx.net'
+20/565 url='https://blatternet.de'
+21/565 url='https://rhinogroup.com'
+22/565 url='https://audax.nl'
+23/565 url='https://totalhairacademy.nl'
+24/565 url='https://visiblethoughts.co.uk'
+25/565 url='https://filmac.com'
+26/565 url='https://g2at.com'
+27/565 url='https://australiareiser.no'
+28/565 url='https://waterbearmarketing.com'
+29/565 url='https://betcris.com'
+30/565 url='https://liveramp.com'
+31/565 url='https://imail.ag'
+32/565 url='https://oneclickventures.com'
+33/565 url='https://dreamscapemail.com'
+34/565 url='https://totheend.co.uk'
+35/565 url='https://crowdsouth.com'
+36/565 url='https://chicagodigital.com'
+37/565 url='https://creativeworks.se'
+38/565 url='https://belastingdienst.nl'
+39/565 url='https://www.usc.edu'
+40/565 url='https://webdelujo.com'
+41/565 url='https://cabrol.tv'
+42/565 url='https://dvcom.ca'
+43/565 url='https://presisweb.nl'
+44/565 url='https://invnt.com'
+45/565 url='https://helpwithdata.com'
+46/565 url='https://slingshot.co.nz'
+47/565 url='https://betmarket.com.cy'
+Traceback (most recent call last):
+  File "main.py", line 43, in <module>
+    r = get_whois(url)
+  File "main.py", line 11, in get_whois
+    r = whoisdomain.query(domain)
+  File "/home/workeruser/.local/lib/python3.8/site-packages/whoisdomain/__init__.py", line 252, in query
+    return q2(domain=domain, pc=pc)
+  File "/home/workeruser/.local/lib/python3.8/site-packages/whoisdomain/__init__.py", line 188, in q2
+    result = pwdr.processRequest()
+  File "/home/workeruser/.local/lib/python3.8/site-packages/whoisdomain/processWhoisDomainRequest.py", line 284, in processRequest
+    finished = self._prepRequest()
+  File "/home/workeruser/.local/lib/python3.8/site-packages/whoisdomain/processWhoisDomainRequest.py", line 265, in _prepRequest
+    if self.parser.verifyPrivateRegistry():  # may raise WhoisPrivateRegistry
+  File "/home/workeruser/.local/lib/python3.8/site-packages/whoisdomain/whoisParser.py", line 331, in verifyPrivateRegistry
+    raise WhoisPrivateRegistry(msg)
+whoisdomain.exceptions.WhoisPrivateRegistry: WhoisPrivateRegistry
+
+DONE

@@ -5,7 +5,7 @@ subprocess.run("py -m pip install -U --user whoisdomain", shell=True, check=True
 import json
 
 import whoisdomain
-from whoisdomain.exceptions import WhoisPrivateRegistry
+from whoisdomain.exceptions import WhoisPrivateRegistry, FailedParsingWhoisOutput, WhoisCommandTimeout, UnknownTld, WhoisQuotaExceeded, UnknownDateFormat, WhoisCommandFailed, WhoisException
 
 
 def get_whois(domain):
@@ -15,6 +15,22 @@ def get_whois(domain):
     except WhoisPrivateRegistry:
         # Handle domains that cannot be queried due to private registry issues
         return {"error": "Private registry or protected WHOIS information."}
+    except FailedParsingWhoisOutput:
+        return {"error": "Failed to parse WHOIS output."}
+    except WhoisCommandTimeout:
+        return {"error": "WHOIS query timed out. Please try again later."}
+    except UnknownTld:
+        return {"error": "Failed to process WHOIS information: The Top-Level Domain (TLD) is unknown or not supported."}
+    except WhoisQuotaExceeded:
+        return {"error": "WHOIS request cannot be completed: Quota for WHOIS queries exceeded. Please try again later."}
+    except UnknownDateFormat:
+        return {"error": "Failed to parse WHOIS data: Encountered an unknown date format in the WHOIS response."}
+    except WhoisCommandFailed:
+        return {"error": "WHOIS request failed: The WHOIS command could not be executed successfully. Check the domain name and try again, or verify your network connection."}
+    except WhoisException:
+        return {"error": "An error occurred while fetching WHOIS data. Please check the domain name for any typos and try again. If the problem persists, it may be a temporary issue with the WHOIS service."}
+    except Exception as e:
+        return {"error": f"An unexpected error occurred: {str(e)}"}
 
 
 def flatten_json(y):
@@ -48,7 +64,9 @@ if __name__ == "__main__":
         r = get_whois(url)
         if r:
             fj = flatten_json(r)
-            fj["domain_name_0"] = url
+            if 'error' in fj.keys():
+                fj["name"] = url
+                fj['tld'] = fj['error']
             results.append(fj)
         else:
             results.append(
